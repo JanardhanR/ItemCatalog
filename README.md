@@ -13,6 +13,8 @@ Udacity FSND.
 
    3. some of the functions used were done as part of excercises 
       in earlier courses and have been reused in the project.
+   
+   4. Minimum styling has been done as it is not the focus of this project. 
 
 ## How to open/run the project
    1. Install Vagrant and VirtualBox found [here](https://github.com/udacity/fullstack-nanodegree-vm)   
