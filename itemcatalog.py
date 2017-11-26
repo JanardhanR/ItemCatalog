@@ -139,15 +139,12 @@ def DeleteItemHander(itemid):
     return redirect('/catalog')
 
 @app.route('/catalog.json', methods=['GET'])
-def GetCatalog():
+def GetCatalogItemJson():
     '''Catalog JSON - public
     http://localhost:8000/catalog.json'''
 
-    if not IsUserLoggedIn():
-        redirect("/")
-    else:
-        items = GetCatalogItems()
-        return jsonify(json_list=[i.serialize for i in items])
+    items = GetCatalogItems()
+    return jsonify(json_list=[i.serialize for i in items])
 
 
 @app.route('/gconnect', methods=['POST'])
@@ -221,8 +218,12 @@ def gdisconnect():
     print access_token
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token
     httpreq = httplib2.Http()
-    result = httpreq.request(url, 'GET')[0]
+    # result = httpreq.request(url, 'GET')[0]
+    # print 'Google revoke access returned %s ' % result['status']
+    result, response = httpreq.request(url, 'GET')
     print 'Google revoke access returned %s ' % result['status']
+    print result
+    print response
 
     print 'start delete of session values. '
     del login_session['credentials']
